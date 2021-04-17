@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FreeIPTVar.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <style>
+
+        .catlist {
+            background-color: cadetblue;
+            text-align: center;
+            margin-top:10px;
+        }
+
+        .cat_a {
+            height: 2.5em;
+            margin: 4px;
+            line-height: 2.5em;
+            cursor: pointer;
+            color: white;
+        }
+
+        .catlist :hover {
+            color: darkslategrey;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row catlist">
+
+        @foreach (var Row in Model)
+        {
+            <div onclick="showitem(@Row.CategoryID)" class="col-sm-2 cat_a">@Row.CategoryName</div>
+        }
+      
+    </div>
+
+    @foreach (var Row in Model)
+    {
+        <div id="tab-@Row.CategoryID" class="Row tabs">
+            @Html.Partial("ServerList", Row)
+        </div>
+    }
+
+
+    <script>
+
+    var firstcategory = @Model.FirstOrDefault().CategoryID;
+
+    $(document).ready(function () {
+        showitem(firstcategory);
+    });
+
+    function showitem(CategoryID) {
+        $(".tabs").hide();
+        $("#tab-" + CategoryID+"").show()
+    }
+    </script>
+
+</body>

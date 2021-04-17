@@ -1,0 +1,55 @@
+﻿@model FreeIPTVar.Category
+
+<style>
+
+    .DropDownList, .Quantity, .itemName, .ItemImg, .addbtn , a{
+        float: left;
+        width: 100%;
+        text-align: center;
+        margin: 3px;
+    }
+
+    .maindiv {
+        margin: 10px;
+        
+        width: 20%;
+    }
+
+    .maindiv:hover {
+        margin: 10px;
+        
+        width:23%;
+    }
+
+    .ItemImg {
+        border-radius: 10%;
+    }
+
+</style>
+
+<body>
+
+    @foreach (var server in Model.Servers)
+    {
+    <div onclick="myFunction(@server.ServerID)" id="ItemContainer-@server.ServerID" data-toggle="tooltip" title="@server.ServerDescription" class="col-md-3 col-sm-4 maindiv">
+
+        <h3 class="itemName">@server.ServerTitle</h3>
+        <div>
+            <img class="ItemImg" style="margin:10px" src="@Url.Content("~/Content/img/" + server.ServerImage + "")" />
+        </div>
+       
+       
+    </div>
+    }
+
+    <script>
+
+     
+
+        function myFunction(ServerID) {
+            window.location.href = "/Main/ServerInfo?ServerID=" + ServerID + "";
+        }
+
+    </script>
+
+</body>

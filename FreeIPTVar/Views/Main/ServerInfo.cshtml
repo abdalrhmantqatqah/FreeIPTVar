@@ -1,0 +1,104 @@
+﻿@model FreeIPTVar.Server
+
+<head>
+    <style>
+        .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #808080;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 18px;
+            padding: 15px;
+            width: 15%;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .button span:after {
+                    content: '\00bb';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -20px;
+                    transition: 0.5s;
+                }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+                .button:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+        .title_div {
+            text-align: center;
+        }
+
+        .ServerImg_img {
+            width: 20%;
+            height: 20%;
+        }
+    </style>
+
+  
+
+</head>
+
+
+    @{
+        ViewBag.Title = "ServerInfo";
+    }
+
+
+<body style="text-align:center">
+
+
+
+    <div class="title_div">
+        <h1>@Html.DisplayFor(model => model.ServerTitle)</h1>
+    </div>
+
+    <div class="ServerImg_div">
+        <img class="ServerImg_img" src="@Url.Content("~/Content/img/" + Model.ServerImage + "")" />
+    </div>
+
+    <br />
+
+    <div class="title_div">
+        <label>@Html.DisplayFor(model => model.ServerDescription)</label>
+    </div>
+
+    <br />
+
+    <button id="btn_download" onclick="download_server('@Model.ServerLink')" class="button" style="vertical-align:middle">
+        <span>DownLoad</span>
+    </button>
+
+    <br /><br />
+
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    <script>
+     
+        function download_server(ServerLink) {
+            if (ServerLink != "null")
+                window.open("https://" + ServerLink);
+        }
+
+    </script>
+
+</body>

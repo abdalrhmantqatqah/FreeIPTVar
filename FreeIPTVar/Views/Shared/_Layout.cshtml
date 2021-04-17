@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Free IPTV Ar</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+
+  
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            float: left;
+            padding:10px;
+            width: 100%;
+        }
+
+        #RegistrationCon a {
+            width: 100%;
+            float: left;
+            text-align: center;
+            color: #fff;
+            font-size: 0.9em;
+        }
+
+        #RegistrationCon {
+            padding-top: 0.9em;
+            float: right;
+            width: 6em;
+        }
+
+        .navbar-header{
+           width:140px;
+        }
+     
+    </style>
+
+
+</head>
+<body>
+
+    @{
+        User UserInfo = (User)Session["UserInfo"]; }
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    @Html.ActionLink("Free IPTV Ar", "Index", "Main", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if (UserInfo == null)
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Main")</li>
+
+                        }
+                        else
+                        {
+                            if (UserInfo.UserType == "Normal")
+                            {
+                            <li>@Html.ActionLink("Home", "Index", "Main")</li>
+                            }
+                            else//Admin
+                            {
+                                <li>@Html.ActionLink("Categories", "Index", "Category")</li>
+                                <li>@Html.ActionLink("Server", "Index", "Server")</li>
+
+                            }
+
+                        }
+
+                    </ul>
+                    @if (UserInfo == null)
+                    {
+
+                    }
+                    else
+                    { 
+                        if (UserInfo.UserType == "Admin")
+                        {
+                            <div id="RegistrationCon">
+                                <a href="/Main/Logout">Logout</a>
+                            </div>
+                    }
+
+                    }
+                    </div>
+
+            </div>
+        </div>
+        <div class="container-fluid body-content">
+            @RenderBody()
+          
+            <footer>
+                &copy; @DateTime.Now.Year - Free IPTV Ar
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

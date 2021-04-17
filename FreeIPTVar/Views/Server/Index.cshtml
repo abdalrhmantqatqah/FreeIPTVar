@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FreeIPTVar.Server>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ServerTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServerLink)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServerImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServerDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServerTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServerLink)
+        </td>
+        <td>
+          
+            <img width="150" height="150" style="margin:10px" src="@Url.Content("~/Content/img/" + item.ServerImage +"")" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServerDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { ServerID = item.ServerID }) |
+            @Html.ActionLink("Delete", "Delete", new { ServerID = item.ServerID })
+        </td>
+    </tr>
+}
+
+</table>
